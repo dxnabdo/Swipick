@@ -162,7 +162,7 @@ export function SwipeCard({ product, onSwipeRight, onSwipeLeft, onSwipeUp, isTop
       </AnimatePresence>
       
       {/* Product Info Overlay */}
-      <div className="absolute bottom-0 left-0 right-0 h-[80px] px-4 py-3 flex flex-col justify-end">
+      <div className="absolute bottom-15 left-0 right-0 h-[80px] px-4 py-3 flex flex-col justify-end">
         {/* Line 1: Brand - Product */}
         <div className="flex items-center gap-2 mb-1">
           <span className="text-[#6C4DFF] font-bold">{product.brand}</span>
