@@ -1,0 +1,222 @@
+@import 'tailwindcss';
+@import 'tw-animate-css';
+
+@custom-variant dark (&:is(.dark *));
+
+:root {
+  /* Swipick Dark Theme */
+  --background: #0F0F1A;
+  --background-secondary: #141428;
+  --foreground: #FFFFFF;
+  --foreground-secondary: #CFCFCF;
+  
+  /* Brand Colors */
+  --brand-purple: #6C4DFF;
+  --brand-purple-light: #A855F7;
+  --brand-like: #FF3B5C;
+  --brand-price: #FFC857;
+  
+  /* Category Glow Colors */
+  --glow-kids-start: #4DA3FF;
+  --glow-kids-end: #A8D8FF;
+  --glow-women-start: #FF4D8D;
+  --glow-women-end: #FFB6C1;
+  --glow-men-start: #1E3A8A;
+  --glow-men-end: #3B82F6;
+  --glow-bags-start: #FFC857;
+  --glow-bags-end: #FFE08A;
+  --glow-shoes-start: #10B981;
+  --glow-shoes-end: #6EE7B7;
+  
+  /* Action Button Colors */
+  --action-undo: #9E9E9E;
+  --action-dislike: #E94560;
+  --action-share: #2196F3;
+  --action-like: #4CAF50;
+  --action-details: #6C4DFF;
+  
+  /* UI Components */
+  --card: #141428;
+  --card-foreground: #FFFFFF;
+  --popover: #141428;
+  --popover-foreground: #FFFFFF;
+  --primary: #6C4DFF;
+  --primary-foreground: #FFFFFF;
+  --secondary: #141428;
+  --secondary-foreground: #CFCFCF;
+  --muted: #1a1a2e;
+  --muted-foreground: #CFCFCF;
+  --accent: #6C4DFF;
+  --accent-foreground: #FFFFFF;
+  --destructive: #E94560;
+  --destructive-foreground: #FFFFFF;
+  --border: rgba(108, 77, 255, 0.2);
+  --input: #1a1a2e;
+  --ring: #6C4DFF;
+  --radius: 0.75rem;
+  
+  /* Glass Effect */
+  --glass-bg: rgba(20, 20, 40, 0.7);
+  --glass-border: rgba(108, 77, 255, 0.3);
+}
+
+@theme inline {
+  --font-sans: 'Cairo', 'Geist', sans-serif;
+  --font-mono: 'Geist Mono', monospace;
+  --color-background: var(--background);
+  --color-background-secondary: var(--background-secondary);
+  --color-foreground: var(--foreground);
+  --color-foreground-secondary: var(--foreground-secondary);
+  --color-brand-purple: var(--brand-purple);
+  --color-brand-purple-light: var(--brand-purple-light);
+  --color-brand-like: var(--brand-like);
+  --color-brand-price: var(--brand-price);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'Cairo', sans-serif;
+  }
+}
+
+/* Glass Effect Classes */
+.glass {
+  background: var(--glass-bg);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid var(--glass-border);
+}
+
+.glass-strong {
+  background: rgba(20, 20, 40, 0.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--glass-border);
+}
+
+/* Category Glow Effects */
+.glow-kids {
+  background: radial-gradient(circle at center, var(--glow-kids-start), var(--glow-kids-end));
+}
+
+.glow-women {
+  background: radial-gradient(circle at center, var(--glow-women-start), var(--glow-women-end));
+}
+
+.glow-men {
+  background: radial-gradient(circle at center, var(--glow-men-start), var(--glow-men-end));
+}
+
+.glow-bags {
+  background: radial-gradient(circle at center, var(--glow-bags-start), var(--glow-bags-end));
+}
+
+.glow-shoes {
+  background: radial-gradient(circle at center, var(--glow-shoes-start), var(--glow-shoes-end));
+}
+
+/* Neon Button Effect */
+.neon-button {
+  box-shadow: 0 0 10px var(--brand-purple), 0 0 20px rgba(108, 77, 255, 0.5);
+  transition: box-shadow 0.3s ease;
+}
+
+.neon-button:hover {
+  box-shadow: 0 0 15px var(--brand-purple), 0 0 30px rgba(108, 77, 255, 0.7);
+}
+
+/* Marquee Animation */
+@keyframes marquee {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee {
+  animation: marquee 20s linear infinite;
+}
+
+/* Hide scrollbar */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Swipe Card 3D Transform */
+.swipe-card {
+  transform-style: preserve-3d;
+  perspective: 1000px;
+}
+
+/* RTL Support */
+[dir="rtl"] .animate-marquee {
+  animation-direction: reverse;
+}
+
+/* Like Effect Animation */
+@keyframes like-pop {
+  0% {
+    transform: scale(0.5);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.5);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(2);
+    opacity: 0;
+  }
+}
+
+.like-effect {
+  animation: like-pop 0.5s ease-out forwards;
+}
+
+/* Active filter indicator */
+.filter-active {
+  position: relative;
+}
+
+.filter-active::after {
+  content: '';
+  position: absolute;
+  top: -2px;
+  right: -2px;
+  width: 8px;
+  height: 8px;
+  background: #6C4DFF;
+  border-radius: 50%;
+}
