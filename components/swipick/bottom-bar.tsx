@@ -1,83 +1,57 @@
-'use client'
+'use client';
 
-import { Compass, MessageCircle, ShoppingCart, SlidersHorizontal, MessageSquare } from 'lucide-react'
-import Link from 'next/link'
-import { usePathname } from 'next/navigation'
-import { cn } from '@/lib/utils'
-import { useAppStore } from '@/lib/store'
+import { Compass, Phone, ShoppingBag, Sliders, MessageCircle } from 'lucide-react';
+import Link from 'next/link';
 
 interface BottomBarProps {
-  onFilterClick?: () => void
+  activeTab: string;
 }
 
-export function BottomBar({ onFilterClick }: BottomBarProps) {
-  const pathname = usePathname()
-  const { cart } = useAppStore()
-  
-  const NAV_ITEMS = [
-    { icon: Compass, label: 'استكشف', href: '/swipe', key: 'explore' },
-    { icon: MessageCircle, label: 'واتساب', href: 'https://wa.me/212663319599', external: true, key: 'whatsapp' },
-    { icon: ShoppingCart, label: 'السلة', href: '/cart', key: 'cart' },
-    { icon: SlidersHorizontal, label: 'فرز', href: '#filter', key: 'filter' },
-    { icon: MessageSquare, label: 'دردشة', href: '/chat', key: 'chat' },
-  ]
-  
+export default function BottomBar({ activeTab }: BottomBarProps) {
+  const tabs = [
+    { id: 'swipe', icon: Compass, label: 'استكشف', href: '/swipe' },
+    { id: 'whatsapp', icon: Phone, label: 'واتساب', href: 'https://wa.me/21266319599', external: true },
+    { id: 'cart', icon: ShoppingBag, label: 'السلة', href: '/cart' },
+    { id: 'filter', icon: Sliders, label: 'فرز', href: '#', action: 'filter' },
+    { id: 'chat', icon: MessageCircle, label: 'دردشة', href: '/chat' },
+  ];
+
   return (
-    <div className="h-[50px] glass-strong fixed bottom-0 left-0 right-0 flex items-center justify-around px-4 z-40">
-      {NAV_ITEMS.map((item) => {
-        const isActive = pathname === item.href
-        const Icon = item.icon
-        
-        if (item.external) {
+    <div className="fixed bottom-0 left-0 right-0 bg-[#141428]/90 backdrop-blur-xl border-t border-purple-500/20 z-10 h-[65px]">
+      <div className="flex items-center justify-around h-full max-w-md mx-auto">
+        {tabs.map((tab) => {
+          const Icon = tab.icon;
+          const isActive = activeTab === tab.id;
+
+          if (tab.external) {
+            return (
+              <a
+                key={tab.id}
+                href={tab.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex flex-col items-center justify-center gap-1 text-gray-400 hover:text-purple-400 transition-colors"
+              >
+                <Icon className="w-5 h-5" />
+                <span className="text-[10px]">{tab.label}</span>
+              </a>
+            );
+          }
+
           return (
-            <a
-              key={item.key}
-              href={item.href}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex flex-col items-center gap-0.5"
+            <Link
+              key={tab.id}
+              href={tab.href}
+              className={`flex flex-col items-center justify-center gap-1 transition-colors ${
+                isActive ? 'text-purple-400' : 'text-gray-400 hover:text-purple-400'
+              }`}
             >
-              <Icon className="w-5 h-5 text-[#25D366]" />
-              <span className="text-[10px] text-[#CFCFCF]">{item.label}</span>
-            </a>
-          )
-        }
-        
-        if (item.href === '#filter') {
-          return (
-            <button
-              key={item.key}
-              onClick={onFilterClick}
-              className="flex flex-col items-center gap-0.5"
-            >
-              <Icon className="w-5 h-5 text-[#CFCFCF] hover:text-[#6C4DFF] transition-colors" />
-              <span className="text-[10px] text-[#CFCFCF]">{item.label}</span>
-            </button>
-          )
-        }
-        
-        return (
-          <Link
-            key={item.key}
-            href={item.href}
-            className="flex flex-col items-center gap-0.5 relative"
-          >
-            <Icon className={cn(
-              "w-5 h-5",
-              isActive ? "text-[#6C4DFF]" : "text-[#CFCFCF]"
-            )} />
-            <span className={cn(
-              "text-[10px]",
-              isActive ? "text-[#6C4DFF]" : "text-[#CFCFCF]"
-            )}>{item.label}</span>
-            {item.href === '/cart' && cart.length > 0 && (
-              <span className="absolute -top-1 -right-1 w-4 h-4 bg-[#FF3B5C] rounded-full text-[10px] flex items-center justify-center text-white font-bold">
-                {cart.length}
-              </span>
-            )}
-          </Link>
-        )
-      })}
+              <Icon className="w-5 h-5" />
+              <span className="text-[10px]">{tab.label}</span>
+            </Link>
+          );
+        })}
+      </div>
     </div>
-  )
+  );
 }
