@@ -60,7 +60,7 @@ export function ActionButtons({ onUndo, onDislike, onShare, onLike, onDetails, c
       </AnimatePresence>
       
       {/* Buttons */}
-      <div className="absolute bottom-[35%] left-0 right-0 flex items-center justify-center gap-5 z-20">
+      <div className="absolute bottom-[20%] left-0 right-0 flex items-center justify-center gap-5 z-20">
         {BUTTONS.map(({ key, icon: Icon, size, color }) => (
           <button
             key={key}
